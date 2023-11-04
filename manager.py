@@ -23,11 +23,11 @@ class PipelineManager:
             else:
                 raise TypeError(f"Job {job_class.__class__.__name__} must implement JobInterface")
 
-    def execute_jobs(self, asset_data, *parameters):
+    def execute_jobs(self, *parameters):
         if len(self.jobs) == 0:
             print("ERROR: no managed jobs, you may want to `add_registered_jobs` first.")
         for job in self.jobs:
-            job.do(asset_data, *parameters, atomics=self.atomics)
+            job.do(*parameters, atomics=self.atomics)
         return [job.__class__.__name__ for job in self.jobs]
 
     def __read_config(self):

@@ -5,7 +5,7 @@ from inspect import signature
 
 class JobInterface(ABC):
     @abstractmethod
-    def do(self, asset_data, *parameters, atomics):
+    def do(self, *parameters, atomics):
         pass
 
     def __init_subclass__(cls, **kwargs) -> None:

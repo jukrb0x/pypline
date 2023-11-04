@@ -1,8 +1,8 @@
 # Pypline 🐍 📦
 
-Python Script As Pipeline.
+Create your custom Pipeline in Python script.
 
-A **Pipeline** consists of the different jobs and executes them in the order. A **Job** is an action node in the
+A **Pipeline** consists of the different jobs and executes them in the order. A **Job** is an action node (python function) in the
 pipeline, jobs share pipeline variables called **Atomics** which can be modified by jobs.
 
 ## How to use

@@ -1,7 +1,7 @@
 from manager import Manager
 import pathlib
 
-manager = Manager(pathlib.Path(__file__).parent / "worker.json")
+manager = Manager(pathlib.Path(__file__).parent / "workers.json")
 manager.add_registered_workers()
 
 # todo: pass asset data and parameters from somewhere else

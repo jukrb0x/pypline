@@ -1,7 +1,7 @@
 from manager import PipelineManager
 import pathlib
 
-asset_data = ["/Game/A", "/Game/B"]
+asset_data = ["/Game/C"]
 atomics = {'asset_data': asset_data}
 
 manager = PipelineManager(config_file=pathlib.Path(__file__).parent / "pipeline.json", atomics=atomics)

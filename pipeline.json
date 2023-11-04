@@ -10,6 +10,7 @@
     }
   ],
   "atomics": {
-    "name": "Homer Simpson"
+    "name": "Homer Simpson",
+    "asset_data": ["/Game/A", "/Game/B"]
   }
 }

@@ -10,6 +10,9 @@
     }
   ],
   "atomics": {
-    "name": "Homer Simpson"
+    "name": "Harry Potter",
+    "age": 3,
+    "some_list": [1,2,3],
+    "asset_data": ["/Game/A", "/Game/B"]
   }
 }

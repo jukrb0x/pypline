@@ -34,7 +34,18 @@ class PipelineManager:
         try:
             with open(self.config_file, "r") as f:
                 try:
-                    self.config_jobs = json.load(f)["jobs"]
+                    config_object = json.load(f)
+                    if not isinstance(config_object, dict):
+                        raise Exception("Pipeline config is not a valid json object")
+                    self.config_jobs = config_object["jobs"]
+                    if not isinstance(self.config_jobs, list):
+                        raise Exception(f"[{self.config_file}] Jobs should be a list")
+                    atomics = config_object["atomics"]
+                    if not isinstance(atomics, dict):
+                        raise Exception(f"[{self.config_file}] Atomics should be a dict object")
+                    else:
+                        # the atomics in the config file has higher priority than manager constructor argument
+                        self.atomics = {**self.atomics, **config_object["atomics"]}
                 except Exception as e:
                     print("ERROR: failed to load pipeline pipeline config.")
                     print(e)

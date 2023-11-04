@@ -1,12 +1,14 @@
 import json
 
+from interface import JobInterface
 from job_registry import job_registry
 from utils import import_job
 
 
 class PipelineManager:
-    def __init__(self, config_file=None) -> None:
+    def __init__(self, config_file=None, atomics=None) -> None:
         self.jobs = []  # instanced jobs
+        self.atomics = atomics if atomics is not None else {}  # atomic variables that shared in the pipeline
         self.config_file = config_file
         self.config_jobs = {}
         self.job_classes = []  # we use job registry for store, just leave it here for now
@@ -16,13 +18,16 @@ class PipelineManager:
 
     def add_registered_jobs(self):
         for job_class in job_registry:
-            self.jobs.append(job_class())
+            if issubclass(job_class, JobInterface):
+                self.jobs.append(job_class())
+            else:
+                raise TypeError(f"Job {job_class.__class__.__name__} must implement JobInterface")
 
     def execute_jobs(self, asset_data, *parameters):
         if len(self.jobs) == 0:
             print("ERROR: no managed jobs, you may want to `add_registered_jobs` first.")
         for job in self.jobs:
-            job.do(asset_data, *parameters)
+            job.do(asset_data, *parameters, atomics=self.atomics)
         return [job.__class__.__name__ for job in self.jobs]
 
     def __read_config(self):

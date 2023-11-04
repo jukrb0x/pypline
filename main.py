@@ -1,11 +1,11 @@
-from manager import Manager
+from manager import PipelineManager
 import pathlib
 
-manager = Manager(pathlib.Path(__file__).parent / "workers.json")
-manager.add_registered_workers()
+manager = PipelineManager(pathlib.Path(__file__).parent / "pipeline.json")
+manager.add_registered_jobs()
 
 # todo: pass asset data and parameters from somewhere else
 asset_data = ["/Game/A", "/Game/B"]
 parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 
-manager.execute_workers(asset_data, *parameters)
+manager.execute_jobs(asset_data, *parameters)

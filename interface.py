@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from worker_registry import worker_registry
+from job_registry import job_registry
 
 
-class WorkerInterface(ABC):
+class JobInterface(ABC):
     @abstractmethod
     def do(self, asset_data, *parameters):
         pass
@@ -12,4 +12,4 @@ class WorkerInterface(ABC):
         automatically add Worker class to registry
         """
         super().__init_subclass__(**kwargs)
-        worker_registry.append(cls)
+        job_registry.append(cls)

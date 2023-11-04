@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "module": "jobs.job_a",
+      "class": "JobA"
+    },
+    {
+      "module": "jobs.job_b",
+      "class": "SomeNamedJob"
+    }
+  ]
+}

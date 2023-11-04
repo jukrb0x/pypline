@@ -4,43 +4,43 @@ Python Script As Pipeline
 
 ## How to use
 
-### Imported worker manually
+### Imported job manually
 
-All concreate classes of `WorkerInterface` in `worker_a` and `worker_b` will be automatically added into worker registry
+All concreate classes of `JobInterface` in `job_a` and `job_b` will be automatically added into job registry
 when they are imported in the script.
 
 **main.py**
 
 ```python
-from manager import Manager
-from workers import worker_a, worker_b
+from manager import PipelineManager
+from jobs import job_a, job_b
 
-manager = Manager()
-manager.add_registered_workers()
+manager = PipelineManager()
+manager.add_registered_jobs()
 
 asset_data = ["/Game/A", "/Game/B"]
 parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 
-manager.execute_workers(asset_data, *parameters)
+manager.execute_jobs(asset_data, *parameters)
 ```
 
-### Automated with worker config
+### Automated with pipeline config
 
-Execute workers with a workers config json file, which allows more flexible way to specify the module and
-exact `WorkerInterface` classes.
+Execute jobs with a config json file, which allows more flexible way to specify the module and exact `JobInterface`
+classes.
 
-**workers.json**
+**pipeline.json**
 
 ```json
 {
-  "workers": [
+  "jobs": [
     {
-      "module": "workers.worker_a",
-      "class": "WorkerA"
+      "module": "jobs.job_a",
+      "class": "JobA"
     },
     {
-      "module": "workers.worker_b",
-      "class": "SomeNamedWorker"
+      "module": "jobs.job_b",
+      "class": "SomeNamedJob"
     }
   ]
 }
@@ -49,16 +49,16 @@ exact `WorkerInterface` classes.
 **main.py**
 
 ```python
-from manager import Manager
+from manager import PipelineManager
 import pathlib
 
-manager = Manager(pathlib.Path(__file__).parent / "workers.json")
-manager.add_registered_workers()
+manager = PipelineManager(pathlib.Path(__file__).parent / "pipeline.json")
+manager.add_registered_jobs()
 
 asset_data = ["/Game/A", "/Game/B"]
 parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 
-manager.execute_workers(asset_data, *parameters)
+manager.execute_jobs(asset_data, *parameters)
 ```
 
 Both of usage should give the output as following:
@@ -66,8 +66,8 @@ Both of usage should give the output as following:
 ```shell
 $ python main.py
 
-[WorkerA] asset data: ['/Game/A', '/Game/B'], parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
-[SomeNamedWorker] asset data: ['/Game/A', '/Game/B'], parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
+[JobA] asset data: ['/Game/A', '/Game/B'], parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
+[SomeNamedJob] asset data: ['/Game/A', '/Game/B'], parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 ```
 
 ## Tests

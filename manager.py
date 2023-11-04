@@ -6,7 +6,7 @@ from utils import import_worker
 
 class Manager:
     def __init__(self, config_file=None) -> None:
-        self.workers = []
+        self.workers = []  # instanced workers
         self.config_file = config_file
         self.config_workers = {}
         self.worker_classes = []  # we use worker registry for store, just leave it here for now
@@ -19,8 +19,11 @@ class Manager:
             self.workers.append(worker_class())
 
     def execute_workers(self, asset_data, *parameters):
+        if len(self.workers) == 0:
+            print("ERROR: no managed workers, you may want to `add_registered_workers` first.")
         for worker in self.workers:
             worker.do(asset_data, *parameters)
+        return [worker.__class__.__name__ for worker in self.workers]
 
     def __read_config(self):
         try:

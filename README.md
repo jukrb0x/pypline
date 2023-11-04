@@ -7,7 +7,7 @@ function) in the pipeline, jobs share pipeline variables called **Atomics** whic
 
 ## How to use
 
-### Imported job manually
+### Importing job manually
 
 All concreate classes of `JobInterface` in `job_a` and `job_b` will be automatically added into Job Registry
 when they are imported in the script. _Jobs_ are executed in the order of importing modules.
@@ -33,7 +33,7 @@ manager.execute_jobs(*parameters)
 
 _Atomics_ are shared variables in the pipeline, _jobs_ can access and modify them.
 
-### Automated with pipeline config
+### Automation with pipeline config
 
 Execute jobs with a config json file, which allows more flexible way to specify the module and exact `JobInterface`
 classes. _Jobs_ are executed in the order as in the json file.

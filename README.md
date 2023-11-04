@@ -16,14 +16,18 @@ when they are imported in the script. _Jobs_ are executed in the order of import
 
 ```python
 from manager import PipelineManager
+# jobs will be added to job registry when importing their modules
 from jobs import job_a, job_b
 
 atomics = {'asset_data': ["/Game/A", "/Game/B"]}
 manager = PipelineManager(atomics=atomics)
+
+# this will add jobs in job registry to the pipeline manager
 manager.add_registered_jobs()
 
 parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 
+# start the jobs in the order of imports
 manager.execute_jobs(*parameters)
 ```
 

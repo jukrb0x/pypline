@@ -6,6 +6,7 @@ class WorkerInterface():
     @abstractmethod
     def do(self, asset_data, *parameters):
         pass
+
     def __init_subclass__(cls, **kwargs) -> None:
         super().__init_subclass__(**kwargs)
         worker_registry.append(cls)

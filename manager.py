@@ -1,5 +1,6 @@
 from worker_registry import worker_registry
 
+
 class Manager:
     def __init__(self) -> None:
         self.workers = []

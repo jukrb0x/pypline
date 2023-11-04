@@ -1,13 +1,11 @@
 from manager import Manager
 
-from workers import worker_a
-
 manager = Manager()
 
 manager.add_registered_workers()
 
-asset_data = ["test"]
+asset_data = ["/Game/A", "/Game/B"]
 
-parameters = (1,2)
+parameters = (1, 2, "some_string")
 
 manager.execute_workers(asset_data, *parameters)

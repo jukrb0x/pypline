@@ -1,0 +1,12 @@
+{
+  "workers": [
+    {
+      "module": "workers.worker_a",
+      "class": "WorkerA"
+    },
+    {
+      "module": "workers.worker_b",
+      "class": "SomeNamedWorker"
+    }
+  ]
+}

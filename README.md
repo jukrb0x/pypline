@@ -2,14 +2,14 @@
 
 Create your custom Pipeline in Python script.
 
-A **Pipeline** consists of the different jobs and executes them in the order. A **Job** is an action node (python function) in the
-pipeline, jobs share pipeline variables called **Atomics** which can be modified by jobs.
+A **Pipeline** consists of the different jobs and executes them in the order. A **Job** is an action node (python
+function) in the pipeline, jobs share pipeline variables called **Atomics** which can be modified by jobs.
 
 ## How to use
 
 ### Imported job manually
 
-All concreate classes of `JobInterface` in `job_a` and `job_b` will be automatically added into job registry
+All concreate classes of `JobInterface` in `job_a` and `job_b` will be automatically added into Job Registry
 when they are imported in the script. _Jobs_ are executed in the order of importing modules.
 
 **main.py**
@@ -101,10 +101,11 @@ A `PipelineManager` starts a session of pipeline, and manage the lifecycle of it
 
 ```python
 from manager import PipelineManager
+
 # you can manually import the Job Class
 # from jobs import job_a
 
-atomics = {"name": "Richard Feynman"} # extend the atomics in the config file
+atomics = {"name": "Richard Feynman"}  # extend the atomics in the config file
 
 # config_file and atomics are optional for the PipelineManager,
 # but it's suggested to use config to do the pipeline work.

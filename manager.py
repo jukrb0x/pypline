@@ -11,10 +11,10 @@ class PipelineManager:
         self.atomics = atomics if atomics is not None else {}  # atomic variables that shared in the pipeline
         self.config_file = config_file
         self.config_jobs = {}
-        self.job_classes = []  # we use job registry for store, just leave it here for now
+        self.job_classes_in_config = []  # we use job registry for store, just leave it here for now
         if len(self.jobs) == 0 and self.config_file:
             self.__read_config()
-            self.job_classes = [import_job(w) for w in self.config_jobs]
+            self.job_classes_in_config = [import_job(w) for w in self.config_jobs]
 
     def add_registered_jobs(self):
         for job_class in job_registry:

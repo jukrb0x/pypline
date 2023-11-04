@@ -124,6 +124,8 @@ manager.execute_jobs(*parameters)
 A Job is a concrete class of `JobInterface` and implements a `do()` method, the task of the job should be done in the
 method.
 
+When the Job module is imported in the script, the Job Class will be automatically added to Job Registry.
+
 ```python
 from interface import JobInterface
 

@@ -9,10 +9,10 @@ class Manager:
         self.workers = []
         self.config_file = config_file
         self.config_workers = {}
+        self.worker_classes = []  # we use worker registry for store, just leave it here for now
         if len(self.workers) == 0 and self.config_file:
             self.__read_config()
-            for c in self.config_workers:
-                import_worker(c)
+            self.worker_classes = [import_worker(w) for w in self.config_workers]
 
     def add_registered_workers(self):
         for worker_class in worker_registry:
@@ -32,4 +32,4 @@ class Manager:
                     print(e)
 
         except FileNotFoundError:
-            print("ERROR: WORKER CONFIG NOT FOUND")
+            print("ERROR: WORKER CONFIG NOT FOUND.")

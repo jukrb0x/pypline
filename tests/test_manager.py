@@ -1,6 +1,6 @@
 import pathlib
 import unittest
-from manager import PipelineManager
+from pypline import Pipeline
 from interface import JobInterface
 
 
@@ -17,13 +17,13 @@ class TestJobB(JobInterface):
 
 class TestManager(unittest.TestCase):
     def test_add_registered_jobs(self):
-        manager = PipelineManager()
+        manager = Pipeline()
         manager.add_registered_jobs()
         self.assertEqual(len(manager.jobs), 2)
 
     def test_execute_jobs(self):
         atomics = {'name': 'Joe', 'asset_data': ["/Game/A", "/Game/B"]}
-        manager = PipelineManager(atomics=atomics)
+        manager = Pipeline(atomics=atomics)
         parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
         manager.add_registered_jobs()
         executed_jobs = manager.execute_jobs(parameters)
@@ -31,7 +31,7 @@ class TestManager(unittest.TestCase):
 
     def test_execute_jobs_with_config(self):
         atomics = {'name': 'Joe', 'asset_data': ["/Game/A", "/Game/B"]}
-        manager = PipelineManager(config_file=pathlib.Path(__file__).parent / "pipeline.json", atomics=atomics)
+        manager = Pipeline(config_file=pathlib.Path(__file__).parent / "pipeline.json", atomics=atomics)
         parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
         manager.add_registered_jobs()
         executed_jobs = manager.execute_jobs(parameters)

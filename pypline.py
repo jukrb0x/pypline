@@ -5,7 +5,7 @@ from job_registry import job_registry
 from utils import import_job
 
 
-class PipelineManager:
+class Pipeline:
     def __init__(self, config_file=None, atomics=None) -> None:
         self.jobs = []  # instanced jobs
         self.atomics = atomics if atomics is not None else {}  # atomic variables that shared in the pipeline

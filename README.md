@@ -15,12 +15,12 @@ when they are imported in the script. _Jobs_ are executed in the order of import
 **main.py**
 
 ```python
-from manager import PipelineManager
+from pypline import Pipeline
 # jobs will be added to job registry when importing their modules
 from jobs import job_a, job_b
 
 atomics = {'asset_data': ["/Game/A", "/Game/B"]}
-manager = PipelineManager(atomics=atomics)
+manager = Pipeline(atomics=atomics)
 
 # this will add jobs in job registry to the pipeline manager
 manager.add_registered_jobs()
@@ -62,20 +62,20 @@ classes. _Jobs_ are executed in the order as in the json file.
 }
 ```
 
-_Atomics_ can be defined in the config file and have **higher priority** than the same one in the `PipelineManager`
-constructor, which means _Atomics_ in the config file can be extended in the initialization of `PipelineManager` but
+_Atomics_ can be defined in the config file and have **higher priority** than the same one in the `Pipeline`
+constructor, which means _Atomics_ in the config file can be extended in the initialization of `Pipeline` but
 they will not be overwritten by the code.
 
 **main.py**
 
 ```python
-from manager import PipelineManager
+from pypline import Pipeline
 import pathlib
 
 asset_data = ["/Game/C"]
 atomics = {'asset_data': asset_data}
 
-manager = PipelineManager(config_file=pathlib.Path(__file__).parent / "pipeline.json", atomics=atomics)
+manager = Pipeline(config_file=pathlib.Path(__file__).parent / "pipeline.json", atomics=atomics)
 manager.add_registered_jobs()
 
 parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
@@ -95,21 +95,21 @@ $ python main.py
 
 ## References
 
-### Pipeline Manager
+### Pipeline (Pipeline Manager)
 
-A `PipelineManager` starts a session of pipeline, and manage the lifecycle of it.
+A `Pipeline` starts a session of pipeline, and manage the lifecycle of it.
 
 ```python
-from manager import PipelineManager
+from pypline import Pipeline
 
 # you can manually import the Job Class
 # from jobs import job_a
 
 atomics = {"name": "Richard Feynman"}  # extend the atomics in the config file
 
-# config_file and atomics are optional for the PipelineManager,
+# config_file and atomics are optional for the Pipeline,
 # but it's suggested to use config to do the pipeline work.
-manager = PipelineManager(config_file="/path/to/pipeline.json", atomics=atomics)
+manager = Pipeline(config_file="/path/to/pipeline.json", atomics=atomics)
 
 # this will add all jobs in job registry to the manager.
 manager.add_registered_jobs()
@@ -140,7 +140,7 @@ class JobA(JobInterface):
 #### `do(self, *parameters, atomics)`
 
 You will strictly implement the signature of this method in your Job Classes, **`atomics`** is a dict can be modified in
-the job and is shared in the pipeline. **`parameters`** is dynamically set from `PipelineManager` when executing jobs.
+the job and is shared in the pipeline. **`parameters`** is dynamically set from `Pipeline` when executing jobs.
 
 ##### parameters
 
@@ -179,7 +179,7 @@ manually imported Job Class in the code will also be counted in the pipeline que
 #### `atomics`
 
 An object (dict) that defines pipeline variables in the beginning. It can be used together with atomics defined in the
-constructor of `PipelineManager`, but the atomics in the config file has the highest priority than others.
+constructor of `Pipeline`, but the atomics in the config file has the highest priority than others.
 
 ```json
 {
@@ -194,10 +194,10 @@ constructor of `PipelineManager`, but the atomics in the config file has the hig
 ```
 
 ```python
-from manager import PipelineManager
+from pypline import Pipeline
 
 atomics = {"asset_data": "/Game/C"}  # this won't work since we already have "asset_data" in the config file
-manager = PipelineManager(config_file="/path/to/pipeline.json", atomics=atomics)
+manager = Pipeline(config_file="/path/to/pipeline.json", atomics=atomics)
 ```
 
 ## Tests

@@ -35,7 +35,7 @@ class TestManager(unittest.TestCase):
         parameters = (1, 2, "some_string", 1.234, ['element'], ('a', 'b'), {'k': 'v'})
         manager.add_registered_jobs()
         executed_jobs = manager.execute_jobs(parameters)
-        self.assertEqual(["TestJobA", "TestJobB", "JobA", "SomeNamedJob"], executed_jobs)
+        self.assertEqual(["TestJobA", "TestJobB", "JobA", "JobB"], executed_jobs)
 
 
 if __name__ == "__main__":

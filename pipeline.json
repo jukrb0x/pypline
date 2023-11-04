@@ -6,7 +6,7 @@
     },
     {
       "module": "jobs.job_b",
-      "class": "SomeNamedJob"
+      "class": "JobB"
     }
   ],
   "atomics": {

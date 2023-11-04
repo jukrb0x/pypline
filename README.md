@@ -49,7 +49,7 @@ classes. _Jobs_ are executed in the order as in the json file.
     },
     {
       "module": "jobs.job_b",
-      "class": "SomeNamedJob"
+      "class": "JobB"
     }
   ],
   "atomics": {
@@ -90,7 +90,7 @@ Both of usage should give the same output as following:
 ```shell
 $ python main.py
 [JobA] atomics: {'asset_data': ['/Game/A', '/Game/B'], 'name': 'Homer Simpson'}, parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
-[SomeNamedJob] atomics: {'asset_data': ['/Game/A', '/Game/B'], 'name': 'Homer Simpson'}, parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
+[JobB] atomics: {'asset_data': ['/Game/A', '/Game/B'], 'name': 'Homer Simpson'}, parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 ```
 
 ## References
@@ -165,7 +165,7 @@ manually imported Job Class in the code will also be counted in the pipeline que
     },
     {
       "module": "jobs.job_b",
-      "class": "SomeNamedJob"
+      "class": "JobB"
     }
   ]
 }

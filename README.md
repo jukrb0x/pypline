@@ -142,6 +142,11 @@ class JobA(JobInterface):
 You will strictly implement the signature of this method in your Job Classes, **`atomics`** is a dict can be modified in
 the job and is shared in the pipeline. **`parameters`** is dynamically set from `PipelineManager` when executing jobs.
 
+##### parameters
+
+> [!NOTE]  
+> TODO: each `parameters` is expected to be made for each Job, but we currently use a global `parameters` for all jobs.
+
 ### Pipeline config
 
 Config filename (`pipeline.json`) can be specified by user as long as properly used in the code.

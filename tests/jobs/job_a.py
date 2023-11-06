@@ -1,4 +1,4 @@
-from interface import JobInterface
+from pypline import JobInterface
 
 
 class JobA(JobInterface):

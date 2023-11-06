@@ -88,7 +88,7 @@ manager.execute_jobs(*parameters)
 Both usages should give the same output as follows:
 
 ```shell
-$ python main.py
+$ python example.py
 [JobA] atomics: {'asset_data': ['/Game/A', '/Game/B'], 'name': 'Homer Simpson'}, parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 [JobB] atomics: {'asset_data': ['/Game/A', '/Game/B'], 'name': 'Homer Simpson'}, parameters: (1, 2, 'some_string', 1.234, ['element'], ('a', 'b'), {'k': 'v'})
 ```

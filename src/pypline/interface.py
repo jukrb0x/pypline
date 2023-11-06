@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from job_registry import job_registry
+from .job_registry import job_registry
 from inspect import signature
 
 

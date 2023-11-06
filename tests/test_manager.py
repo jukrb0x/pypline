@@ -1,7 +1,6 @@
 import pathlib
 import unittest
-from pypline import Pipeline
-from interface import JobInterface
+from pypline import Pipeline, JobInterface
 
 
 class TestJobA(JobInterface):
@@ -36,7 +35,6 @@ class TestManager(unittest.TestCase):
         manager.add_registered_jobs()
         executed_jobs = manager.execute_jobs(parameters)
         self.assertEqual(["TestJobA", "TestJobB", "JobA", "JobB"], executed_jobs)
-
 
 if __name__ == "__main__":
     unittest.main()

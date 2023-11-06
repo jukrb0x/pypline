@@ -1,11 +1,11 @@
 {
   "jobs": [
     {
-      "module": "jobs.job_a",
+      "module": "pypline.tests.jobs.job_a",
       "class": "JobA"
     },
     {
-      "module": "jobs.job_b",
+      "module": "pypline.tests.jobs.job_b",
       "class": "JobB"
     }
   ],

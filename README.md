@@ -9,7 +9,7 @@ function) in the pipeline, jobs share pipeline variables called **Atomics** whic
 
 ### Importing job manually
 
-All concreate classes of `JobInterface` in `job_a` and `job_b` will be automatically added into Job Registry
+All concrete classes of `JobInterface` in `job_a` and `job_b` will be automatically added into Job Registry
 when they are imported in the script. _Jobs_ are executed in the order of importing modules.
 
 **main.py**
@@ -35,7 +35,7 @@ _Atomics_ are shared variables in the pipeline, _jobs_ can access and modify the
 
 ### Automation with pipeline config
 
-Execute jobs with a config json file, which allows more flexible way to specify the module and exact `JobInterface`
+Execute jobs with a config json file, which allows a more flexible way to specify the module and exact `JobInterface`
 classes. _Jobs_ are executed in the order as in the json file.
 
 **pipeline.json**
@@ -85,7 +85,7 @@ manager.execute_jobs(*parameters)
 
 ---
 
-Both of usage should give the same output as following:
+Both usages should give the same output as follows:
 
 ```shell
 $ python main.py
@@ -94,10 +94,12 @@ $ python main.py
 ```
 
 ## References
+> [!WARNING]  
+> We are at the early stage of development, APIs are subject to change.
 
 ### Pipeline (Pipeline Manager)
 
-A `Pipeline` starts a session of pipeline, and manage the lifecycle of it.
+A `Pipeline` starts a session of pipeline, and manages the lifecycle of it.
 
 ```python
 from pypline import Pipeline
@@ -125,7 +127,7 @@ manager.execute_jobs(*parameters)
 A Job is a concrete class of `JobInterface` and implements a `do()` method, the task of the job should be done in the
 method.
 
-When the Job module is imported in the script, the Job Class will be automatically added to Job Registry.
+When the Job module is imported into the script, the Job Class will be automatically added to Job Registry.
 
 ```python
 from interface import JobInterface
@@ -139,21 +141,21 @@ class JobA(JobInterface):
 
 #### `do(self, *parameters, atomics)`
 
-You will strictly implement the signature of this method in your Job Classes, **`atomics`** is a dict can be modified in
+You will strictly implement the signature of this method in your Job Classes, **`atomics`** is a dict that can be modified in
 the job and is shared in the pipeline. **`parameters`** is dynamically set from `Pipeline` when executing jobs.
 
 ##### parameters
 
-> [!NOTE]  
-> TODO: each `parameters` is expected to be made for each Job, but we currently use a global `parameters` for all jobs.
+> [!NOTE]
+> TODO: each `parameters` is expected to be made for each Job, but we currently use global `parameters` for all jobs.
 
 ### Pipeline config
 
-Config filename (`pipeline.json`) can be specified by user as long as properly used in the code.
+Config filename (`pipeline.json`) can be specified by the user as long as properly used in the code.
 
 | Key     | Type   | Description                                                                        |
 |---------|--------|------------------------------------------------------------------------------------|
-| jobs    | List   | Jobs to executed in the pipeline, specify the module and job class to be imported. |
+| jobs    | List   | Jobs to be executed in the pipeline, specify the module and job class to be imported. |
 | atomics | Object | Shared variables in the pipeline, can be modified by jobs.                         |
 
 #### `jobs`
@@ -179,7 +181,7 @@ manually imported Job Class in the code will also be counted in the pipeline que
 #### `atomics`
 
 An object (dict) that defines pipeline variables in the beginning. It can be used together with atomics defined in the
-constructor of `Pipeline`, but the atomics in the config file has the highest priority than others.
+constructor of `Pipeline`, but the atomics in the config file has the highest priority over others.
 
 ```json
 {

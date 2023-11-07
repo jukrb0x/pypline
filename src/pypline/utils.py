@@ -42,17 +42,17 @@ def hotreload_module(module):
 
 def hotreload_package(package):
     """
-    FIXME: do not use this
+    FIXME: do not use this, buggy
     """
-    modules_to_reload = []
+    modules_to_remove = []
     for module_name in sys.modules:
         if module_name == package.__name__ or module_name.startswith(str(package.__name__) + "."):
-            modules_to_reload.append(module_name)
-    for module_name in modules_to_reload:
+            modules_to_remove.append(module_name)
+    for module_name in modules_to_remove:
         del sys.modules[module_name]
         importlib.import_module(module_name)
 
-    return modules_to_reload
+    return modules_to_remove
 
 
 def remove_package(package):

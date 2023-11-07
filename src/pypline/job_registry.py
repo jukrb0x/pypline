@@ -1,4 +1,6 @@
 """
-Worker Registry keeps all jobs' classes
+Worker Registry keeps all jobs' classes as templates
 """
-job_registry = []
+from .class_registry import ClassRegistry
+
+job_registry = ClassRegistry()

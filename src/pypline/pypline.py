@@ -15,14 +15,27 @@ class Pipeline:
         self.job_classes_in_config = []  # we use job registry for store, just leave it here for now
         if len(self.jobs) == 0 and self.config_file:
             self.__read_config()
-            self.job_classes_in_config = [import_job(w) for w in self.config_jobs]
+            self.job_classes_in_config = [import_job(w, True) for w in self.config_jobs]
 
     def add_registered_jobs(self):
+        """
+        make template classes to instanced job objectes
+        """
         for job_class in job_registry:
             if issubclass(job_class, JobInterface):
-                self.jobs.append(job_class())
+                # one class one instance
+                if not any(isinstance(job, job_class) for job in self.jobs):
+                    self.jobs.append(job_class())
             else:
                 raise TypeError(f"Job {job_class.__class__.__name__} must implement JobInterface")
+
+    @staticmethod
+    def get_job_registry():
+        return job_registry
+
+    @staticmethod
+    def reset_job_registry():
+        job_registry.clear()
 
     def execute_jobs(self, *parameters):
         if len(self.jobs) == 0:

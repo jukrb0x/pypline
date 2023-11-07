@@ -22,4 +22,6 @@ class JobInterface(ABC):
             raise TypeError(
                 f"The method {cls.do.__name__} in class {cls.__name__} must have the same signature as the abstract method: {abstract_signature_of_do}")
 
-        job_registry.append(cls)
+        # prevent duplicate 'import', though job_registry is a class registry set
+        if cls not in job_registry:
+            job_registry.add(cls)
